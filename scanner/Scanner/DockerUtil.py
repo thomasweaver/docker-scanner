@@ -18,9 +18,11 @@ class DockerUtil():
 		imageInspect = self.advClient.inspect_image(image)
 		return imageInspect
 
-	def runContainer(self, image, command, volumes):
+#	def deleteContainer(self):
+
+	def runContainer(self, image, volumes="", command=""):
 		try:
-			container = self.client.containers.run(image, command, auto_remove=True, volumes=volumes, detach=True)
+			container = self.client.containers.run(image, command, auto_remove=False, volumes=volumes, detach=True)
 		except docker.errors.ImageNotFound as e:
 			raise Exception("Image not found")
 
