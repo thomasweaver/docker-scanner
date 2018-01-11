@@ -14,6 +14,7 @@ RUN make install
 RUN /sbin/ldconfig
 RUN echo /sbin/ldconfig >> /etc/bash.bashrc
 RUN mkdir -p /opt/localscanner
+RUN apt-get -y install debsecan
 ADD LocalScan /opt/localscanner/LocalScan
 ADD localscan.py /opt/localscanner/.
 

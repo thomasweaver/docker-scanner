@@ -38,3 +38,14 @@ if __name__ == "__main__":
 		imageName = sys.argv[2]
 		mount = Mount.Mount(DockerImage.DockerImage(imageName))
 		mount.performMount()
+	elif command == "enter":
+		if len(sys.argv) < 4:
+			print "You must provide an image name to start and image name to mount"
+			sys.exit(1)
+		imageNameStart = sys.argv[2]
+		imageNameMount = sys.argv[3]
+		mount = Mount.Mount(DockerImage.DockerImage(imageNameMount))
+                mount.performMount()
+		docker= DockerUtil.DockerUtil()
+		volumes = {mount.mountpoint : {'bind': '/mnt/rootfs', 'mode': 'ro'}}
+                objContainer = docker.runContainer(imageNameStart, volumes, "/bin/sh -c 'while true; do sleep 10; done'")

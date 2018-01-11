@@ -14,7 +14,7 @@ class Output():
 		for command in self.objCommands:
 			tmpObj={}
 			tmpObj['command'] = command.command
-			tmpObj['returnCode'] = command.returnCode
+			tmpObj['returnCode'] = command.actualReturnCode
 			tmpObj['rawOutput'] = command.output
 			tmpObj['parsedOutput'] = command.arrParsed
 			self.objOutput.append(tmpObj)

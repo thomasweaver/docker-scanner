@@ -2,7 +2,9 @@ from LocalScan import Command
 from LocalScan import Output
 
 commands=[]
-commandsRaw=[[["dpkg", "--list"], r'^(?P<status>[a-zA-Z]+)\s+(?P<pkgname>.*?)\s+(?P<pkgversion>.*?)\s+(?P<pkgarch>.*?)\s+(?P<pkgdesc>.*)'], [["apt-get", "-s", "upgrade"], r'^(?P<upgraded>\d+) upgraded, (?P<newlyinstalled>\d+) newly installed, (?P<removed>\d+) to remove and (?P<notupgraded>\d+) not upgraded']]
+#commandsRaw=[[["dpkg", "--list"], r'^(?P<status>[a-zA-Z]+)\s+(?P<pkgname>.*?)\s+(?P<pkgversion>.*?)\s+(?P<pkgarch>.*?)\s+(?P<pkgdesc>.*)'], [["apt-get", "-s", "upgrade"], r'^(?P<upgraded>\d+) upgraded, (?P<newlyinstalled>\d+) newly installed, (?P<removed>\d+) to remove and (?P<notupgraded>\d+) not upgraded']]
+commandsRaw=[[["dpkg", "--list"], r'^(?P<status>[a-zA-Z]+)\s+(?P<pkgname>.*?)\s+(?P<pkgversion>.*?)\s+(?P<pkgarch>.*?)\s+(?P<pkgdesc>.*)'], [["apt-get", "-s", "upgrade"], r'^(?P<upgraded>\d+) upgraded, (?P<newlyinstalled>\d+) newly installed, (?P<removed>\d+) to remove and (?P<notupgraded>\d+) not upgraded'], [["debsecan", "--status=/mnt/rootfs/var/lib/dpkg/status"], "^(?P<cve>[A-Z\-0-9]+)\s+(?P<pkgname>.*?)\s\((?P<dets>.*?)\)"]]
+
 for command in  commandsRaw:
 	command = Command.Command(command[0], command[1])
 	command.runCommand()
